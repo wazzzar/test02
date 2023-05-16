@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="initial-scale=1">
+        <title>Title</title>
+
+        <link rel="stylesheet" href="/bootstrap-5.3.0-alpha3-dist/css/bootstrap.min.css">
+        <link rel="icon" href="">
+    </head>
+
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-lg-3" id="login_block">
+                    <h1>Авторизация</h1>
+
+                    <form action="login.php" method="post" id="login_form">
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Логин</label>
+                            <input type="text" name="login" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">Пароль</label>
+                            <input type="password" name="pass" class="form-control" id="exampleInputPassword1" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Войти</button>
+                        <div class="alert alert-danger d-none" id="message"></div>
+                    </form>
+                </div>
+
+                <div class="col-sm-12 col-lg-3 d-none" id="user_block">
+                    <h1>Пользователь</h1>
+                    <button class="btn btn-info d-none" title="Войти в другой аккаунт" id="account">+</button>
+                    <select class="form-control d-none" id="select_account">
+                        <option value=""></option>
+                    </select>
+                    <table class="table table-bordered">
+                        <tr>
+                            <td>ФИО</td>
+                            <td id="fio"></td>
+                        </tr>
+                        <tr>
+                            <td>Фото</td>
+                            <td>
+                                <img src="" alt="" id="ava" class="w-100">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>День рождения</td>
+                            <td id="bd"></td>
+                        </tr>
+                    </table>
+                    <div class="alert alert-info d-none" id="hello">Вы успешно авторизовались</div>
+                    <a href="loguot.php" class="btn btn-danger" onclick="return confirm('Вы уверены?')">Выйти</a>
+
+                </div>
+            </div>
+        </div>
+
+        <script src="main.js"></script>
+    </body>
+</html>
