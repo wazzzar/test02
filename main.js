@@ -1,5 +1,5 @@
 // возвращает cookie если есть или undefined
-function getCookie(name) {
+function get_cookie(name) {
     let matches = document.cookie.match(new RegExp(
         "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
     ));
@@ -24,7 +24,7 @@ login_form.addEventListener('submit', (e) => {
                 message_div.classList.remove('d-none');
                 message_div.innerHTML = data.error;
             }else{
-                showUser(1);
+                show_user(1);
             }
         }
     };
@@ -33,7 +33,7 @@ login_form.addEventListener('submit', (e) => {
 
 let user_block = document.querySelector('#user_block');
 let hello = document.querySelector('#hello');
-function showUser(logged = 0) {
+function show_user(logged = 0) {
     login_block.classList.add('d-none');
     user_block.classList.remove('d-none');
 
@@ -61,7 +61,7 @@ function showUser(logged = 0) {
                 document.querySelector('#bd').innerHTML = data.berthday;
 
                 /* multi account
-                let login = getCookie('login');
+                let login = get_cookie('login');
                 if (login){
                     document.querySelector('#fio').innerHTML = data[login].fio;
                     document.querySelector('#ava').src = data[login].image + data[login].id + '.jpg';
@@ -71,7 +71,7 @@ function showUser(logged = 0) {
                 if ( data.length > 1 ){
                     select_account.classList.remove('d-none');
                     //select_account.
-                    let sessions = getCookie('session');
+                    let sessions = get_cookie('session');
                     for ( session in sessions ){
                         //select_account.
                     }
@@ -96,5 +96,5 @@ select_account.addEventListener('change', () => {
 });*/
 
 window.onload = () => {
-    showUser(0);
+    show_user(0);
 }

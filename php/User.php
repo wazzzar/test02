@@ -14,18 +14,18 @@ class User {
 
     }
 
-    public function isLogged(): int
+    public function is_logged(): int
     {
         return $this->authorized;
     }
 
-    public static function checkAuthorization(string $md5_login, string $token): User
+    public static function check_authorization(string $md5_login, string $token): User
     {
         $user = new User();
         if( !empty($md5_login) && !empty($token) ) {
             $res = DB::qaf("SELECT `token` FROM `users` WHERE `login` = '$md5_login'");
             $user->authorized = ($res[0]["token"] === $token? 1 : 0);
-            if ($user->authorized) $user->loadData($md5_login, $token);
+            if ($user->authorized) $user->load_data($md5_login, $token);
         }
         return $user;
     }
@@ -34,7 +34,7 @@ class User {
     {
         $user = new User();
         if( !empty($login) && !empty($pass) ) {
-            $md5_login = self::getLoginHash($login);
+            $md5_login = self::get_login_hash($login);
 
             $records = DB::qaf("SELECT `number`, `ts` FROM `users` WHERE `login` = '$md5_login'");
             if ( count($records) == 0 ){
@@ -43,14 +43,14 @@ class User {
                 $record = $records[0];
                 if( (int)$record["number"] < 3 && (int)$record["ts"] == 0 ) {
 
-                    $md5_pass = self::getPassHash($pass);
+                    $md5_pass = self::get_pass_hash($pass);
                     $_user = DB::qaf("SELECT `id`, `token` FROM `users` WHERE `login` = '$md5_login' AND `pass` = '$md5_pass'");
 
                     if ($_user[0]["id"]) {
                         setcookie("login", $md5_login, time() + 3600, "/");
                         if ( !empty($_user[0]["token"]) ){
                             // сохранение сессии
-                            self::setToken($_user[0]["token"]);
+                            self::set_token($_user[0]["token"]);
                         }else{
                             // новая сессия
                             self::authorize($md5_login, $md5_pass);
@@ -85,24 +85,24 @@ class User {
         return $user;
     }
 
-    public static function getLoginHash($login): string
+    public static function get_login_hash($login): string
     {
         return md5( md5($login).md5("license login") );
     }
 
-    public static function getPassHash($pass): string
+    public static function get_pass_hash($pass): string
     {
         return md5( md5($pass).md5("license pass" ) );
     }
 
-    private static function setToken($token){
+    private static function set_token($token){
         setcookie("token", $token, time()+3600, "/");
     }
 
     private static function authorize(string $md5_login, string $md5_pass){
         // новый токен
         $token = md5( date("c") );
-        self::setToken($token);
+        self::set_token($token);
         // multi account
         //setcookie("session[$md5_login]", $token, time()+3600, "/");
 
@@ -113,11 +113,11 @@ class User {
         file_put_contents("access.log", $str, FILE_APPEND | LOCK_EX);
     }
 
-    private function loadData(string $md5_login, string $token){
+    private function load_data(string $md5_login, string $token){
         $this->data = DB::qaf("SELECT `id`, `fio`, `image`, `berthday` FROM `users` WHERE `login` = '$md5_login' AND  `token` = '$token'")[0];
     }
 
-    public function getData(): array
+    public function get_data(): array
     {
         return $this->data;
     }
