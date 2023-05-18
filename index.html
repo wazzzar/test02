@@ -29,31 +29,23 @@
                     </form>
                 </div>
 
-                <div class="col-sm-12 col-lg-3 d-none" id="user_block">
-                    <h1>Пользователь</h1>
-                    <button class="btn btn-info d-none" title="Войти в другой аккаунт" id="account">+</button>
-                    <select class="form-control d-none" id="select_account">
-                        <option value=""></option>
-                    </select>
-                    <table class="table table-bordered">
-                        <tr>
-                            <td>ФИО</td>
-                            <td id="fio"></td>
-                        </tr>
-                        <tr>
-                            <td>Фото</td>
-                            <td>
-                                <img src="" alt="" id="ava" class="w-100">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>День рождения</td>
-                            <td id="bd"></td>
-                        </tr>
-                    </table>
+                <div class="col-sm-12 col-lg-6 d-none" id="user_block">
                     <div class="alert alert-info d-none" id="hello">Вы успешно авторизовались</div>
-                    <a href="loguot.php" class="btn btn-danger" onclick="return confirm('Вы уверены?')">Выйти</a>
+                    <div class="card mb-3" style="max-width: 540px;">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img src="..." class="img-fluid rounded-start" alt="..." id="ava">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title" id="fio"></h5>
+                                    <p class="card-text" id="bd"></p>
+                                    <a href="loguot.php" class="btn btn-danger" onclick="return confirm('Вы уверены?')">Выйти</a>
 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
